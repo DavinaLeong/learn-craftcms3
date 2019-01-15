@@ -21,10 +21,10 @@
                 <th>Style</th>
             </tr>
 
-            {% for entry in craft.entries.section('drinks').limit(10).all() %}
+            {% for entry in craft.entries.section('drinks').orderBy('drinksDateAdded desc').limit(10).all() %}
             <tr>
                 <td><a href="{{ entry.url }}">{{ entry.title }}</a></td>
-                <td>{{ entry.postDate | date("M Y") }}</td>
+                <td>{{ entry.drinksDateAdded | date("M Y") }}</td>
                 <td><a href="/styles/index.html">Espresso</a></td>
             </tr>
             {% endfor %}
