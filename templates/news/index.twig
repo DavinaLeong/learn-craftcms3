@@ -11,24 +11,19 @@
         <p class="tagline reverse">Coffee news from the shop and beyond.</p>
     </div>
 </div>
-{# <div class="row news-item first">
+
+{% set firstEntry = craft.entries.section('news').one() %}
+<div class="row news-item first">
     <div class="large-12 small-12 columns">
 
-        <h1><a href="">News Article Title</a></h1>
-        <p class="byline">by Ryan Irelan on January 1, 2017</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
+        <h1><a href="{{ firstEntry.url }}">{{ firstEntry.title }}</a></h1>
+        <p class="byline">by {{ firstEntry.author }} on {{ firstEntry.postDate | date(dateFormatNews) }}</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur deleniti dignissimos est explicabo, iure laborum minima natus nihil qui repudiandae, velit voluptatum! Animi id illo illum in maiores velit?</p>
+        {{ firstEntry.newsBody }}
     </div>
-</div> #}
+</div>
 
-{% for entry in craft.entries.section('news').limit(10).all() %}
+{% for entry in craft.entries.section('news').limit(9).offset(1).all() %}
 <div class="row">
     <div class="large-12 small-12 columns">
         <div class="intro large-12 small-12 columns text-center">
@@ -36,7 +31,7 @@
         </div>
 
         <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
-        <p class="byline">by {{ entry.author }} on {{ entry.postDate | date("F d, Y") }}</p>
+        <p class="byline">by {{ entry.author }} on {{ entry.postDate | date(dateFormatNews) }}</p>
 
         {{ entry.newsBody }}
     </div>
